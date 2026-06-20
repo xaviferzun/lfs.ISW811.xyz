@@ -15,6 +15,18 @@ use Illuminate\Support\Facades\Route;
 // });
 
 //Misma forma de hacerlo
-Route::view('/', 'welcome');
-Route::view('/about', 'about');
-Route::view('/contact', 'contact');
+
+// Route::view('/about', 'about');
+// Route::view('/contact', 'contact');
+
+// Route::view('/', 'welcome', [
+//     'greeting' => 'Bienvenido a mi sitio web',
+//     'person' => request('person')
+// ]);
+
+Route::get('/', function () {
+    return view('welcome', [
+        'greeting' => 'Bienvenido a mi sitio web',
+        'person' => request('person', 'Mundo'),
+    ]);
+});
