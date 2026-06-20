@@ -22,3 +22,4 @@ En este repositorio documentaré mi avance por el curso en línea Laravel From S
 ## Módulo 1: The Fundamentals
 
 - [Routing 101](./the-fundamentals/routing-101.md)
+- [Layout Files](./the-fundamentals/layout-files.md)
