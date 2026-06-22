@@ -24,9 +24,21 @@ use Illuminate\Support\Facades\Route;
 //     'person' => request('person')
 // ]);
 
+//PASS DATA TO VIEWS
+// Route::get('/', function () {
+//     return view('welcome', [
+//         'greeting' => 'Bienvenido a mi sitio web',
+//         'person' => request('person', 'Mundo'),
+//     ]);
+// });
+
+//BLADE DIRECTIVES
 Route::get('/', function () {
     return view('welcome', [
-        'greeting' => 'Bienvenido a mi sitio web',
-        'person' => request('person', 'Mundo'),
+        'tasks' => [
+            'Hacer la compra',
+            'Limpiar la casa',
+            'Pasear al perro',
+        ],
     ]);
 });
