@@ -6,27 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title }}</title>
-    <style>
-        .max-w-400 {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: #c2d3ff;
-            padding: 1rem;
-            text-align: center;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <nav>
-        <a href="/">Inicio</a>
-        <a href="/about">Sobre nosotros</a>
-        <a href="/contact">Contáctanos</a>
-    </nav>
+<body class="bg-gray-900 text-white max-w-xl mx-auto">
     <main>
         {{ $slot }}
     </main>
 </body>
-</html>
+</html>   

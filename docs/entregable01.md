@@ -25,3 +25,4 @@ En este repositorio documentaré mi avance por el curso en línea Laravel From S
 - [Layout Files](./the-fundamentals/layout-files.md)
 - [Pass Data to Views](./the-fundamentals/pass-data-to-views.md)
 - [Blade Directives](./the-fundamentals/blade-directives.md)
+- [Forms](./the-fundamentals/forms.md)

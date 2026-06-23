@@ -2,43 +2,25 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/about', function () {
-//     return view('about');
-// });
-
-// Route::get('/contact', function () {
-//     return view('contact');
-// });
-
-//Misma forma de hacerlo
-
-// Route::view('/about', 'about');
-// Route::view('/contact', 'contact');
-
-// Route::view('/', 'welcome', [
-//     'greeting' => 'Bienvenido a mi sitio web',
-//     'person' => request('person')
-// ]);
-
-//PASS DATA TO VIEWS
-// Route::get('/', function () {
-//     return view('welcome', [
-//         'greeting' => 'Bienvenido a mi sitio web',
-//         'person' => request('person', 'Mundo'),
-//     ]);
-// });
-
-//BLADE DIRECTIVES
+//FORMS
 Route::get('/', function () {
-    return view('welcome', [
-        'tasks' => [
-            'Hacer la compra',
-            'Limpiar la casa',
-            'Pasear al perro',
-        ],
+    $ideas = session()->get('ideas', []);
+
+    return view('ideas', [
+        'ideas' => $ideas,
     ]);
+});
+
+//POST IDEAS
+Route::post('/ideas', function () {
+    $idea = request('idea');
+
+    session()->push('ideas', $idea);
+    return redirect('/');
+});
+
+//DELETE IDEAS
+Route::get('/delete-ideas', function () {
+    session()->forget('ideas');
+    return redirect('/');
 });
