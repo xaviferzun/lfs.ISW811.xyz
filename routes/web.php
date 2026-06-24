@@ -4,49 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Idea;
 
 //FORMS
-Route::get('/ideas', function () {
-    // $ideas = Idea::where('state', 'pending')->get();
-    $ideas = Idea::all();
-
-    return view('ideas/index', [
-        'ideas' => $ideas,
-    ]);
-});
-
-//show ideas
-Route::get('/ideas/{idea}', function (Idea $idea) {
-    return view('ideas.show', [
-        'idea' => $idea,
-    ]);
-});
-
-//edit ideas 
-Route::get('/ideas/{idea}/edit', function (Idea $idea) {
-    return view('ideas.edit', [
-        'idea' => $idea,
-    ]);
-});
-
-// update ideas
-Route::patch('/ideas/{idea}/edit', function (Idea $idea) {
-    $idea->update([
-        'description' => request('description'),
-    ]);
-    return redirect('/ideas/' . $idea->id);
-});
-
-//POST IDEAS
-Route::post('/ideas', function () {
-    Idea::create([
-        'description' => request('description'),
-        'state' => 'pending',
-    ]);
-    return redirect('/');
-});
-
-//Destroy
-Route::delete('/ideas/{idea}', function (Idea $idea) {
-    $idea->delete();
-    return redirect('/ideas');
-});
-
+Route::get('/ideas', [IdeaController::class, 'index']);
+Route::get('/ideas/create', [IdeaController::class, 'create']);
+Route::post('/ideas', [IdeaController::class, 'store']);
+Route::get('/ideas/{idea}', [IdeaController::class, 'show']);
+Route::get('/ideas/{idea}/edit', [IdeaController::class, 'edit']);
+Route::patch('/ideas/{idea}/edit', [IdeaController::class, 'update']);
+Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy']);

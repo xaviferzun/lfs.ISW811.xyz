@@ -8,7 +8,7 @@
     <title>{{ $title }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 text-white max-w-xl mx-auto">
+<body class="bg-gray-900 text-white max-w-xl mx-auto text-white">
     <main>
         {{ $slot }}
     </main>
