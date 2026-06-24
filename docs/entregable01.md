@@ -29,3 +29,4 @@ En este repositorio documentaré mi avance por el curso en línea Laravel From S
 - [Databases, Migrations, and Eloquent](./the-fundamentals/databases-migrations-and-eloquent.md)
 - [HTTP Requests and REST](./the-fundamentals/http-requests-and-rest.md)
 - [Controllers](./the-fundamentals/controllers.md)
+- [Form Request Classes](./the-fundamentals/form-request-classes.md)
