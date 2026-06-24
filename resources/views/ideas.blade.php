@@ -15,12 +15,12 @@
         </div>
     </form>
 
-    @if (count($ideas))
+    @if ($ideas->count())
         <div class="mt-6 text-white">
             <h2 class="font-bold text-lg text-white">Your ideas</h2>
             <ul class='mt-6'>
                 @foreach ($ideas as $idea)
-                    <li class="text-small">{{ $idea }}</li>
+                    <li class="text-small">{{ $idea->description }}</li>
                 @endforeach
             </ul>
         </div>
