@@ -3,5 +3,5 @@
 ])
 
 @error($name)
-    <p class="mt-2 text-sm text-red-600" id="description-error">{{ $message }}</p>
+    <p class="mt-2 text-sm text-error" id="description-error">{{ $message }}</p>
 @enderror

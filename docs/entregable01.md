@@ -30,3 +30,4 @@ En este repositorio documentaré mi avance por el curso en línea Laravel From S
 - [HTTP Requests and REST](./the-fundamentals/http-requests-and-rest.md)
 - [Controllers](./the-fundamentals/controllers.md)
 - [Form Request Classes](./the-fundamentals/form-request-classes.md)
+- [A Brief DaisyUI Detour](./the-fundamentals/a-brief-daisyui-detour.md)
