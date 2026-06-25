@@ -31,3 +31,7 @@ En este repositorio documentaré mi avance por el curso en línea Laravel From S
 - [Controllers](./the-fundamentals/controllers.md)
 - [Form Request Classes](./the-fundamentals/form-request-classes.md)
 - [A Brief DaisyUI Detour](./the-fundamentals/a-brief-daisyui-detour.md)
+
+## Módulo 2: Authentication and Authorization
+
+- [Authentication Explained](./authentication-authorization/authentication-explained.md)
