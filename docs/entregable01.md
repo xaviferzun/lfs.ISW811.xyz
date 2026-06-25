@@ -36,4 +36,5 @@ En este repositorio documentaré mi avance por el curso en línea Laravel From S
 
 - [Authentication Explained](./authentication-authorization/authentication-explained.md)
 - [Require Authentication With Middleware](./authentication-authorization/require-authentication-with-middleware.md)
+- [Eloquent Relationships](./authentication-authorization/eloquent-relationships.md)
 
