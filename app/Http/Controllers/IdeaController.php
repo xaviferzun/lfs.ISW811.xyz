@@ -6,6 +6,7 @@ use App\Models\Idea;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\IdeaRequest;
+use Illuminate\Support\Facades\Gate;
 
 class IdeaController extends Controller
 {
@@ -34,6 +35,9 @@ class IdeaController extends Controller
 
     public function show(Idea $idea)
     {
+        //Episode 18
+        Gate::authorize('update', $idea);
+
         return view('ideas.show', [
             'idea' => $idea,
         ]);
@@ -49,6 +53,8 @@ class IdeaController extends Controller
 
     public function update(IdeaRequest $request, Idea $idea)
     {
+        Gate::authorize('update', $idea);
+
         $idea->update([
             'description' => request('description'),
         ]);
@@ -57,6 +63,8 @@ class IdeaController extends Controller
 
     public function destroy(Idea $idea)
     {
+        Gate::authorize('update', $idea);
+
         $idea->delete();
         return redirect('/ideas');
     }

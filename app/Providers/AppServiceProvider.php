@@ -22,14 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('view-admin', function (?User $user) {
-            // if($user->id == 1) {
-            //     return Response::allow();
-                
-            // }
-            // return Response::denyAsNotFound();
 
-            return $user->isAdmin() ? Response::allow() : Response::denyAsNotFound();
-        });
     }
 }
