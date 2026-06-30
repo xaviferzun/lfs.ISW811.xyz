@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\Idea;  
 
-class IdeaPublished extends Notification
+class IdeaPublished extends Notification implements ShouldQueue
 {
     use Queueable;
 

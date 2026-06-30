@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\IdeaRequest;
 use Illuminate\Support\Facades\Gate;
+use App\Notifications\IdeaPublished;
 
 class IdeaController extends Controller
 {
@@ -31,7 +32,7 @@ class IdeaController extends Controller
         ]);
 
         Auth::user()->notify(new IdeaPublished($idea));
-        
+
         return redirect('/ideas');
     }
 
