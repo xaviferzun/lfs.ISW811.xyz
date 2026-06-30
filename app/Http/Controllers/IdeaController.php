@@ -25,11 +25,13 @@ class IdeaController extends Controller
 
     public function store(IdeaRequest $request)
     {
-        Auth::user()->ideas()->create([
+        $idea = Auth::user()->ideas()->create([
             'description' => request('description'),
             'state' => 'pending',
         ]);
 
+        Auth::user()->notify(new IdeaPublished($idea));
+        
         return redirect('/ideas');
     }
 
