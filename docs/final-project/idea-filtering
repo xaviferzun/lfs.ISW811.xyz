@@ -45,10 +45,11 @@ public function index(Request $request)
 }
 ```
 
+El método `when()` de Eloquent solo aplica el closure si el primer argumento es truthy — si no hay parámetro `status` en la URL, devuelve todas las ideas.
 
 ## Botones de filtro en la vista
 
-Agregué los botones de filtro en `ideas/index.blade.php`, iterando sobre los casos del enum para generarlos dinámicamente segun lo explicado por Jegrey.
+Agregué los botones de filtro en `ideas/index.blade.php`, iterando sobre los casos del enum para generarlos dinámicamente:
 
 ```blade
 <div>
@@ -65,6 +66,7 @@ Agregué los botones de filtro en `ideas/index.blade.php`, iterando sobre los ca
 </div>
 ```
 
+El botón activo se resalta quitando la clase `btn-outlined`, mientras los inactivos la mantienen. El botón "All" es activo cuando no hay parámetro `status` en la URL.
 
 ## Evidencia
 

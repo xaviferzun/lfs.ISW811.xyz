@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\IdeaStatus;
+use App\Models\User;
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,6 +24,20 @@ class Idea extends Model
     protected $attributes = [
         'status' => 'pending',
     ];
+
+    public static function statusCounts(User $user): Collection
+    {
+        $counts = $user->ideas()
+            ->selectRaw('status, count(*) as count')
+            ->groupBy('status')
+            ->pluck('count', 'status');
+
+        return collect(IdeaStatus::cases())
+            ->mapWithKeys(fn ($status) => [
+                $status->value => $counts->get($status->value, 0),
+            ])
+            ->put('all', $user->ideas()->count());
+    }
 
     public function user(): BelongsTo
     {
