@@ -47,7 +47,9 @@ class IdeaController extends Controller
      */
     public function show(Idea $idea)
     {
-        //
+        return view('ideas.show', [
+            'idea' => $idea,
+        ]);
     }
 
     /**
@@ -71,6 +73,9 @@ class IdeaController extends Controller
      */
     public function destroy(Idea $idea)
     {
-        //
+        //Ensure the authenticated user is the owner of the idea
+        $idea->delete();
+
+        return to_route('idea.index');
     }
 }
