@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateIdeaRequest;
 use App\Models\Idea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\IdeaStatus;
 
 class IdeaController extends Controller
 {
@@ -17,7 +18,8 @@ class IdeaController extends Controller
     {
         $ideas = Auth::user()
             ->ideas()
-            ->when($request->status, fn ($query, $status) => $query->where('status', $status))
+            ->when(in_array($request->status, IdeaStatus::values()), fn ($query) => $query->where('status', $request->status))
+            ->latest()
             ->get();
 
         return view('ideas.index', [
@@ -39,7 +41,9 @@ class IdeaController extends Controller
      */
     public function store(StoreIdeaRequest $request)
     {
-        //
+        Auth::user()->ideas()->create($request->validated());
+
+        return to_route('idea.index')->with('success', 'Idea created successfully.'); 
     }
 
     /**
