@@ -53,7 +53,17 @@
         
         {{-- Modal for creating a new idea --}}
         <x-modal name="create-idea" title="New Idea">
-            <form x-data="{status:'pending', links: [], newLink: ''}" method="POST" action="{{ route('idea.store') }}">
+            <form
+                x-data="{
+                    status: @js(App\IdeaStatus::PENDING->value),
+                    links: [],
+                    newLink: '',
+                    steps: [],
+                    newStep: '',
+                }"
+                method="POST"
+                action="{{ route('idea.store') }}"
+            >
                 @csrf
 
                 <div class="space-y-6">
@@ -93,6 +103,52 @@
                         type="textarea"
                         placeholder="Describe your idea..."
                     />
+
+                    <div>
+                        <fieldset class="space-y-3">
+                            <legend class="label">Actionable Steps</legend>
+
+                            <template x-for="(step, index) in steps">
+                                <div class="flex gap-x-2 items-center">
+                                    <input name="steps[]" x-model="step" class="input" readonly>
+
+                                    <button
+                                        type="button"
+                                        aria-label="Remove step"
+                                        @click="steps.splice(index, 1)"
+                                        class="form-muted-icon"
+                                    >
+                                        <x-icons.close />
+                                    </button>
+                                </div>
+                            </template>
+                        </fieldset>
+
+                        <div class="flex gap-x-2 items-center">
+                            <input
+                                x-model="newStep"
+                                type="text"
+                                id="new-step"
+                                data-test="new-step"
+                                placeholder="What's the next step?"
+                                class="input flex-1"
+                                spellcheck="false"
+                            >
+
+                            <button
+                                type="button"
+                                @click="steps.push(newStep.trim()); newStep = '';"
+                                data-test="submit-new-step-button"
+                                :disabled="newStep.trim().length === 0"
+                                aria-label="Add a new step"
+                                class="form-muted-icon"
+                            >
+                                <x-icons.close class="rotate-45" />
+                            </button>
+                        </div>
+                    </div>
+
+
 
                     <div>
                         <fieldset class="space-y-3">
