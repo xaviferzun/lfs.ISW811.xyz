@@ -41,7 +41,10 @@ class IdeaController extends Controller
      */
     public function store(StoreIdeaRequest $request)
     {
-        $idea = Auth::user()->ideas()->create($request->safe()->except('steps'));
+        $idea = Auth::user()->ideas()->create([
+            ...$request->safe()->except(['steps', 'image']),
+            'image_path' => $request->file('image')?->store('idea-images', 'public'),
+        ]);
 
         foreach ($request->validated('steps', []) as $step) {
             $idea->steps()->create(['description' => $step]);
@@ -49,7 +52,6 @@ class IdeaController extends Controller
 
         return to_route('idea.index')->with('success', 'Idea created successfully.');
     }
-
     /**
      * Display the specified resource.
      */

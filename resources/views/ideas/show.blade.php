@@ -23,6 +23,10 @@
         </div>
 
         <div class="mt-8 space-y-6">
+            @if ($idea->image_path)                
+                <img src="{{ asset('storage/' . $idea->image_path) }}" alt="" class="rounded-lg w-full max-h-96 object-cover">
+            @endif
+
             <h1 class="font-bold text-4xl">{{ $idea->title }}</h1>
 
             <div class="mt-2 flex gap-x-3 items-center">

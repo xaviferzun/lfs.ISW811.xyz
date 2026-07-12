@@ -32,6 +32,7 @@ class StoreIdeaRequest extends FormRequest
             'links.*' => ['nullable', 'max:255'],
             'steps' => ['nullable', 'array'],
             'steps.*' => ['string', 'max:255'],
+            'image' => ['nullable', 'image', 'max:5120'], // New validation rule for image
         ];
     }
 }
