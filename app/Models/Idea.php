@@ -22,7 +22,7 @@ class Idea extends Model
     ];
 
     protected $attributes = [
-        'status' => 'pending',
+        'status' => IdeaStatus::PENDING->value,
     ];
 
     public static function statusCounts(User $user): Collection

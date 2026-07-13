@@ -7,6 +7,7 @@ use App\Http\Controllers\StepController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IdeaImageController;
 
 Route::redirect('/', '/ideas');
 Route::get('/ideas', [IdeaController::class, 'index'])->middleware('auth');
@@ -15,8 +16,11 @@ Route::post('/ideas', [IdeaController::class, 'store'])->name('idea.store')->mid
 
 Route::get('/ideas/{idea}', [IdeaController::class, 'show'])->name('idea.show')->middleware('auth');
 
-
+Route::patch('/ideas/{idea}', [IdeaController::class, 'update'])->name('idea.update')->middleware('auth');
 Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy'])->name('idea.destroy')->middleware('auth');
+
+
+Route::delete('/ideas/{idea}/image', [IdeaImageController::class, 'destroy'])->name('idea.image.destroy')->middleware('auth');
 
 Route::patch('/steps/{step}', [StepController::class, 'update'])->name('step.update')->middleware('auth');
 
