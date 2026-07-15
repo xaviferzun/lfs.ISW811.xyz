@@ -3,18 +3,14 @@
 namespace App\Actions;
 
 use App\Models\User;
+use App\Models\Idea;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class CreateIdea
+class UpdateIdea
 {
-    public function __construct(#[CurrentUser] protected ?User $user)
-    {
-       
-    }
-
-    public function handle(array $attributes)
+    public function handle(array $attributes, Idea $idea)
     {
 
         $data = collect($attributes)->only([
@@ -25,8 +21,10 @@ class CreateIdea
             $data['image_path'] = $attributes['image']->store('ideas', 'public');
         }
 
-        DB::transaction(function () use ($data, $attributes) {
-            $idea = $this->user->ideas()->create($data);
+        DB::transaction(function () use ($idea, $data, $attributes) {
+            $idea->update($data);
+
+            $idea->steps()->delete();
 
             $idea->steps()->createMany($attributes['steps'] ?? []);
         });

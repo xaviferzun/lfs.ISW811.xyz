@@ -31,7 +31,8 @@ class IdeaRequest extends FormRequest
             'links' => ['nullable', 'array'],
             'links.*' => ['nullable', 'max:255'],
             'steps' => ['nullable', 'array'],
-            'steps.*' => ['string', 'max:255'],
+            'steps.*.description' => ['string', 'max:255'],
+            'steps.*.completed' => ['boolean'],
             'image' => ['nullable', 'image', 'max:5120'], // New validation rule for image
         ];
     }

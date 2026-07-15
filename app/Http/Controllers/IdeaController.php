@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Actions\CreateIdea;
+use App\Actions\UpdateIdea;
 use App\IdeaStatus;
 
 class IdeaController extends Controller
@@ -68,9 +69,13 @@ class IdeaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(IdeaRequest $request, Idea $idea)
+    public function update(IdeaRequest $request, Idea $idea, UpdateIdea $action)
     {
         Gate::authorize('workWith', $idea);
+
+        $action->handle($request->safe()->all(), $idea);
+
+        return to_route('idea.show', $idea)->with('success', 'Idea updated successfully.');
     }
 
     /**

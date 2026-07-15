@@ -12,7 +12,10 @@ it('creates a new idea', function () {
             'status' => 'completed',
             'description' => 'An example description',
             'links' => ['https://laracasts.com', 'https://laravel.com'],
-            'steps' => ['An example step', 'Another example step'],
+            'steps' => [
+                ['description' => 'An example step'],
+                ['description' => 'Another example step'],
+            ],
         ])
         ->assertRedirect('/ideas');
 

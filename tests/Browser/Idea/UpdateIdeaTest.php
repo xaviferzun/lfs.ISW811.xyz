@@ -1,36 +1,19 @@
 <?php
 
 use App\Models\User;
+use App\Models\Idea;
 
-//Browser
-
-it('creates a new idea', function () {
+it('shows the initial input state', function () {
     $this->actingAs($user = User::factory()->create());
 
-    visit('/ideas')
-        ->click('@create-idea-button')
-        ->fill('title', 'Some Example Title')
-        ->click('@button-status-completed')
-        ->fill('description', 'An example description')
-        ->fill('@new-link', 'https://laracasts.com')
-        ->click('@submit-new-link-button')
-        ->fill('@new-link', 'https://laravel.com')
-        ->click('@submit-new-link-button')
-        ->fill('@new-step', 'An example step')
-        ->click('@submit-new-step-button')
-        ->fill('@new-step', 'Another example step')
-        ->click('@submit-new-step-button')
-        ->click('Create')
-        ->assertPathIs('/ideas');
+    $idea = Idea::factory()->for($user)->create();
 
-    expect($idea = $user->ideas()->first())->toMatchArray([
-        'title' => 'Some Example Title',
-        'status' => 'completed',
-        'description' => 'An example description',
-        'links' => ['https://laracasts.com'],
-    ]);
-
-    expect($idea->steps()->toHaveCount(2));
+    visit(route('idea.show', $idea))
+        ->click('@edit-idea-button')
+        ->assertValue('title', $idea->title)
+        ->assertValue('description', $idea->description)
+        ->assertValue('status', $idea->status->value);
+    ///
 });
 
 
@@ -44,21 +27,19 @@ it('edits an existing idea', function () {
         'links' => ['https://laracasts.com'],
     ]);
 
-    visit(route('/ideas', $idea))
+    visit(route('idea.show', $idea))
         ->click('@edit-idea-button')
         ->fill('title', 'Some Example Title')
         ->click('@button-status-completed')
         ->fill('description', 'An example description')
         ->fill('@new-link', 'https://laracasts.com')
         ->click('@submit-new-link-button')
-        ->fill('@new-link', 'https://laravel.com')
-        ->click('@submit-new-link-button')
         ->fill('@new-step', 'An example step')
         ->click('@submit-new-step-button')
         ->fill('@new-step', 'Another example step')
         ->click('@submit-new-step-button')
-        ->click('Create')
-        ->assertPathIs('/ideas');
+        ->click('Update')
+        ->assertRouteIs('idea.show', [$idea]);
 
     expect($idea = $user->ideas()->first())->toMatchArray([
         'title' => 'Some Example Title',
