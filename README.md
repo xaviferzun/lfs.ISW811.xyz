@@ -22,3 +22,7 @@ composer run format
 php artisan queue:work
 mailpit --listen 0.0.0.0:8025 --smtp 0.0.0.0:1025
 ```
+
+### Despliegue
+
+El proceso de despliegue a producción (Laravel Forge) se documenta sin ejecutar en [Deploy And Then Implement A Feature Request](./docs/final-project/deploy-and-then-implement-a-feature-request.md), conforme a la observación del entregable que no exige contratar servicios externos.
