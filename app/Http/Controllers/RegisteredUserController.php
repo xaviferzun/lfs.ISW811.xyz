@@ -25,6 +25,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect('/')->with('success', 'Your account has been created.');
+        return redirect()->route('idea.index')->with('success', 'Your account has been created.');
     }
 }

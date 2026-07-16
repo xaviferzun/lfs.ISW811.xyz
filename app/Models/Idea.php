@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\IdeaStatus;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
@@ -47,5 +49,12 @@ class Idea extends Model
     public function steps(): HasMany
     {
         return $this->hasMany(Step::class);
+    }
+
+    public function formattedDescription(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => Str::markdown($this->description ?? ''),
+        );
     }
 }
