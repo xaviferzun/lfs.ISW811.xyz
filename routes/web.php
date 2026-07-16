@@ -8,6 +8,7 @@ use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IdeaImageController;
+use App\Http\Controllers\ProfileController;
 
 Route::redirect('/', '/ideas');
 Route::get('/ideas', [IdeaController::class, 'index'])->middleware('auth');
@@ -33,3 +34,7 @@ Route::get('/login', [SessionsController::class, 'create'])->name('login')->midd
 Route::post('/login', [SessionsController::class, 'store'])->middleware('guest');
 
 Route::post('/logout', [SessionsController::class, 'destroy'])->middleware('auth');
+
+Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit')->middleware('auth');
+Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
+Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy')->middleware('auth');
